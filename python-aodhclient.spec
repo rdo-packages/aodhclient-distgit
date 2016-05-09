@@ -7,9 +7,11 @@
 %global with_python3 1
 %endif
 
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+
 Name:             python-aodhclient
-Version:          0.4.0
-Release:          1%{?dist}
+Version:          XXX
+Release:          XXX
 Summary:          Python API and CLI for OpenStack Aodh
 
 License:          ASL 2.0
@@ -109,7 +111,7 @@ provides a Python API (the aodhclient module) and a command-line tool.
 
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%setup -q -n %{pypi_name}-%{upstream_version}
 
 %if 0%{?with_python3}
 rm -rf %{py3dir}
@@ -193,8 +195,3 @@ sphinx-build -b html doc/source html
 %doc html
 
 %changelog
-* Fri Apr 22 2016 Pradeep Kilambi <pkilambi@redhat.com> 0.4.0
-- Rebase to 0.4.0 
-
-* Wed Feb 03 2016 Pradeep Kilambi <pkilambi@redhat.com> 0.1.0
-- Initial package based on python-aodhclient.
