@@ -47,7 +47,6 @@ provides a Python API (the aodhclient module) and a command-line tool.
 
 %package -n python-%{pypi_name}-doc
 Summary:          Documentation for OpenStack Aodh API Client
-Group:            Documentation
 
 BuildRequires:    python-sphinx
 BuildRequires:    python-oslo-sphinx
