@@ -119,9 +119,6 @@ cp -a . %{py3dir}
 2to3 --write --nobackups %{py3dir}
 %endif
 
-# Remove bundled egg-info
-rm -rf aodhclient.egg-info
-
 # Let RPM handle the requirements
 rm -f {,test-}requirements.txt
 
