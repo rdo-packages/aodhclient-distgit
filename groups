@@ -1,3 +1,5 @@
-# UUID                                  	Group Name
-#
-0b5acebb99bb26c9dd8340f01dd55e1b947a4045	openstack/aodhclient-distgit-ptl
+# UUID          Group Name
+False 	Non-Interactive Users
+e2e1ed7e082dc530da7fc6880966517609a4bf40       	openstack/aodhclient-distgit-core
+0b5acebb99bb26c9dd8340f01dd55e1b947a4045        	openstack/aodhclient-distgit-ptl
+global:Registered-Users		Registered Users
