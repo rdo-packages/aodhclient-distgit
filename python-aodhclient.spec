@@ -192,6 +192,7 @@ sphinx-build -b html doc/source html
 %endif
 
 %files -n python-%{pypi_name}-doc
+%license LICENSE
 %doc html
 
 %changelog
