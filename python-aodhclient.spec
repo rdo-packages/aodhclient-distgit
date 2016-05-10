@@ -60,7 +60,7 @@ This package contains auto-generated documentation.
 
 %package -n python2-%{pypi_name}-tests
 Summary:          Python API and CLI for OpenStack Aodh Tests
-Requires:         python-%{pypi_name} = %{version}-%{release}
+Requires:         python2-%{pypi_name} = %{version}-%{release}
 
 %description -n python2-%{pypi_name}-tests
 This is a client library for Aodh built on the Aodh API. It
