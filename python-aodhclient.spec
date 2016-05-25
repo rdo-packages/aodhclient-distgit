@@ -10,8 +10,8 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:             python-aodhclient
-Version:          XXX
-Release:          XXX
+Version:          0.3.0
+Release:          1%{?dist}
 Summary:          Python API and CLI for OpenStack Aodh
 
 License:          ASL 2.0
@@ -192,3 +192,5 @@ sphinx-build -b html doc/source html
 %doc html
 
 %changelog
+* Wed May 25 2016 Pradeep Kilambi <pkilambi@redhat.com> 0.3.0-1
+- Rebuild for Mitaka
