@@ -161,7 +161,8 @@ sphinx-build -b html doc/source html
 %files -n python2-%{pypi_name}
 %doc README.rst
 %license LICENSE
-%{_bindir}/aodh*
+%{_bindir}/aodh
+%{_bindir}/aodh-2*
 %{python2_sitelib}/aodhclient
 %{python2_sitelib}/*.egg-info
 %exclude %{python2_sitelib}/aodhclient/tests
@@ -176,7 +177,8 @@ sphinx-build -b html doc/source html
 %doc README.rst
 %license LICENSE
 %{_bindir}/python3-aodh
-%{_bindir}/aodh*
+%{_bindir}/aodh
+%{_bindir}/aodh-3*
 %{python3_sitelib}/aodhclient
 %{python3_sitelib}/*.egg-info
 %exclude %{python3_sitelib}/aodhclient/tests
