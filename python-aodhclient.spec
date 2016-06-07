@@ -23,7 +23,7 @@ BuildArch:        noarch
 
 %package -n python2-%{pypi_name}
 Summary:          Python API and CLI for OpenStack Aodh
-%{?python_provide:%python_provide python2-%{library}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
 
 BuildRequires:    python-setuptools
