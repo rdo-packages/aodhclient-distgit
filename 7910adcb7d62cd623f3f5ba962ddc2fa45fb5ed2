@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a65312a_d4c0dc2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2016-06-17T22:18:50Z",
+      "side": 1,
+      "message": "Let\u0027s keep the commit message the same as\nhttp://pkgs.fedoraproject.org/cgit/rpms/python-aodhclient.git/commit/?id\u003d13ebc8b318ce6234a3d7225f276238fd77ce9e67\n\nIdeally, rpm-master would comes first and cherry-picked verbatim to Fedora distgit branch.",
+      "revId": "7910adcb7d62cd623f3f5ba962ddc2fa45fb5ed2",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
