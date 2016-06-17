@@ -29,6 +29,7 @@ Summary:          Python API and CLI for OpenStack Aodh
 BuildRequires:    python-setuptools
 BuildRequires:    python2-devel
 BuildRequires:    python-pbr
+BuildRequires:    python-tools
 
 Requires:         python-babel >= 1.3
 Requires:         python-cliff >= 1.14.0
@@ -77,7 +78,7 @@ Summary:          Python API and CLI for OpenStack Aodh
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-pbr >= 0.6
-BuildRequires:  python-tools
+BuildRequires:  python3-tools
 
 Requires:         python3-babel >= 1.3
 Requires:         python3-cliff >= 1.14.0
@@ -177,7 +178,6 @@ sphinx-build -b html doc/source html
 %doc README.rst
 %license LICENSE
 %{_bindir}/python3-aodh
-%{_bindir}/aodh
 %{_bindir}/aodh-3*
 %{python3_sitelib}/aodhclient
 %{python3_sitelib}/*.egg-info
