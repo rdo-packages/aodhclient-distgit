@@ -8,7 +8,7 @@
 
 Name:             python-aodhclient
 Version:          0.3.0
-Release:          2%{?dist}
+Release:          3%{?dist}
 Summary:          Python API and CLI for OpenStack Aodh
 
 License:          ASL 2.0
@@ -162,6 +162,9 @@ sphinx-build -b html doc/source html
 %license LICENSE
 
 %changelog
+* Mon Jul 25 2016 hguemar <hguemar@senbonzakura> - 0.3.0-3
+- Add python3 subpackage
+
 * Tue Jun  7 2016 Haïkel Guémar <hguemar@fedoraproject.org> - 0.3.0-2
 - Fix provides
 
