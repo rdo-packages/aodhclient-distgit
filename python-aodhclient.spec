@@ -37,6 +37,7 @@ Requires:         python-oslo-utils >= 2.0.0
 Requires:         python-keystoneauth1 >= 1.0.0
 Requires:         python-six >= 1.9.0
 Requires:         python-debtcollector
+Requires:         python-osc-lib >= 1.0.1
 
 %description -n python2-%{pypi_name}
 This is a client library for Aodh built on the Aodh API. It
