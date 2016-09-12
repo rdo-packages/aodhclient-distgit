@@ -7,8 +7,8 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:             python-aodhclient
-Version:          XXX
-Release:          XXX
+Version:          0.7.0
+Release:          1%{?dist}
 Summary:          Python API and CLI for OpenStack Aodh
 
 License:          ASL 2.0
@@ -163,3 +163,6 @@ sphinx-build -b html doc/source html
 %license LICENSE
 
 %changelog
+* Mon Sep 12 2016 Haikel Guemar <hguemar@fedoraproject.org> 0.7.0-1
+- Update to 0.7.0
+
