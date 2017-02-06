@@ -38,6 +38,7 @@ Requires:         python-keystoneauth1 >= 1.0.0
 Requires:         python-six >= 1.9.0
 Requires:         python-debtcollector
 Requires:         python-osc-lib >= 1.0.1
+Requires:         pyparsing
 
 %description -n python2-%{pypi_name}
 This is a client library for Aodh built on the Aodh API. It
@@ -85,6 +86,8 @@ Requires:         python3-oslo-utils >= 2.0.0
 Requires:         python3-keystoneauth1 >= 1.0.0
 Requires:         python3-six >= 1.9.0
 Requires:         python3-debtcollector
+Requires:         python3-osc-lib >= 1.0.1
+Requires:         python3-pyparsing
 
 %description -n python3-%{pypi_name}
 This is a client library for Aodh built on the Aodh API. It
