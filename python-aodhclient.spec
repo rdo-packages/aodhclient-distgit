@@ -13,7 +13,7 @@ Summary:          Python API and CLI for OpenStack Aodh
 
 License:          ASL 2.0
 URL:              https://launchpad.net/python-aodhclient
-Source0:          https://pypi.io/packages/source/a/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:          https://tarballs.openstack.org/%{name}/%{pypi_name}-%{upstream_version}.tar.gz
 
 BuildArch:        noarch
 
