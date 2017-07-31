@@ -166,3 +166,4 @@ sphinx-build -b html doc/source html
 %license LICENSE
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/python-aodhclient/commit/?id=ee17a4cd9a638191217cd9049f50e413e7f5ec70
