@@ -28,7 +28,6 @@ Summary:          Python API and CLI for OpenStack Aodh
 BuildRequires:    python-setuptools
 BuildRequires:    python2-devel
 BuildRequires:    python-pbr
-BuildRequires:    git
 
 Requires:         python-pbr
 Requires:         python-cliff >= 1.14.0
@@ -50,11 +49,7 @@ provides a Python API (the aodhclient module) and a command-line tool.
 Summary:          Documentation for OpenStack Aodh API Client
 
 BuildRequires:    python-sphinx
-BuildRequires:    python-openstackdocstheme
-BuildRequires:    python-keystoneauth1
-BuildRequires:    python-oslo-utils
-BuildRequires:    python-oslo-serialization
-BuildRequires:    python-cliff
+BuildRequires:    python-oslo-sphinx
 
 
 %description doc
@@ -109,7 +104,7 @@ provides a Python API (the aodhclient module) and a command-line tool.
 %endif
 
 %prep
-%autosetup -n %{pypi_name}-%{upstream_version} -S git
+%setup -q -n %{pypi_name}-%{upstream_version}
 
 # Let RPM handle the requirements
 rm -f {,test-}requirements.txt
@@ -134,9 +129,8 @@ ln -s ./aodh-%{python2_version} %{buildroot}%{_bindir}/aodh-2
 
 ln -s ./aodh-2 %{buildroot}%{_bindir}/aodh
 
-%{__python2} setup.py build_sphinx -b html
-# remove the sphinx-build leftovers
-rm -rf doc/build/html/.{doctrees,buildinfo}
+export PYTHONPATH="$( pwd ):$PYTHONPATH"
+sphinx-build -b html doc/source html
 
 %files -n python2-%{pypi_name}
 %doc README.rst
@@ -168,7 +162,7 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %files doc
-%doc doc/build/html
+%doc html
 %license LICENSE
 
 %changelog
