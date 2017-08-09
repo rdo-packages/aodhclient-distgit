@@ -50,6 +50,8 @@ provides a Python API (the aodhclient module) and a command-line tool.
 Summary:          Documentation for OpenStack Aodh API Client
 
 BuildRequires:    python-sphinx
+# FIXME: remove following line when a new release including https://review.openstack.org/#/c/476759/ is in u-c
+BuildRequires:    python-oslo-sphinx
 BuildRequires:    python-openstackdocstheme
 BuildRequires:    python-keystoneauth1
 BuildRequires:    python-oslo-utils
