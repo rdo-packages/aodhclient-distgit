@@ -83,6 +83,7 @@ Summary:          Python API and CLI for OpenStack Aodh
 BuildRequires:    python3-setuptools
 BuildRequires:    python3-devel
 BuildRequires:    python3-pbr
+BuildRequires:    openstack-macros
 
 Requires:         python3-pbr
 Requires:         python3-cliff >= 1.14.0
@@ -112,7 +113,7 @@ provides a Python API (the aodhclient module) and a command-line tool.
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
 
 # Let RPM handle the requirements
-rm -f {,test-}requirements.txt
+%py_req_cleanup
 
 
 %build
