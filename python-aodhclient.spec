@@ -6,6 +6,10 @@
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
+%global common_desc \
+This is a client library for Aodh built on the Aodh API. It \
+provides a Python API (the aodhclient module) and a command-line tool.
+
 Name:             python-aodhclient
 Version:          XXX
 Release:          XXX
@@ -18,8 +22,7 @@ Source0:          https://tarballs.openstack.org/%{name}/%{pypi_name}-%{upstream
 BuildArch:        noarch
 
 %description
-This is a client library for Aodh built on the Aodh API. It
-provides a Python API (the aodhclient module) and a command-line tool.
+%{common_desc}
 
 %package -n python2-%{pypi_name}
 Summary:          Python API and CLI for OpenStack Aodh
@@ -41,8 +44,7 @@ Requires:         python-osc-lib >= 1.0.1
 Requires:         pyparsing
 
 %description -n python2-%{pypi_name}
-This is a client library for Aodh built on the Aodh API. It
-provides a Python API (the aodhclient module) and a command-line tool.
+%{common_desc}
 
 
 %package  doc
@@ -59,8 +61,7 @@ BuildRequires:    python-cliff
 
 
 %description doc
-This is a client library for Aodh built on the Aodh API. It
-provides a Python API (the aodhclient module) and a command-line tool
+%{common_desc}
 (aodh).
 
 This package contains auto-generated documentation.
@@ -70,8 +71,7 @@ Summary:          Python API and CLI for OpenStack Aodh Tests
 Requires:         python2-%{pypi_name} = %{version}-%{release}
 
 %description -n python2-%{pypi_name}-tests
-This is a client library for Aodh built on the Aodh API. It
-provides a Python API (the aodhclient module) and a command-line tool.
+%{common_desc}
 
 
 %if 0%{?with_python3}
@@ -95,16 +95,14 @@ Requires:         python3-osc-lib >= 1.0.1
 Requires:         python3-pyparsing
 
 %description -n python3-%{pypi_name}
-This is a client library for Aodh built on the Aodh API. It
-provides a Python API (the aodhclient module) and a command-line tool.
+%{common_desc}
 
 %package -n python3-%{pypi_name}-tests
 Summary:          Python API and CLI for OpenStack Aodh Tests
 Requires:         python3-%{pypi_name} = %{version}-%{release}
 
 %description -n python3-%{pypi_name}-tests
-This is a client library for Aodh built on the Aodh API. It
-provides a Python API (the aodhclient module) and a command-line tool.
+%{common_desc}
 
 %endif
 
