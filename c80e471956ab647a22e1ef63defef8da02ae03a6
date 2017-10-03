@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa81d914_7f463325",
+        "filename": "python-aodhclient.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 424
+      },
+      "writtenOn": "2017-10-03T13:43:46Z",
+      "side": 1,
+      "message": "Need a tests global I think",
+      "revId": "c80e471956ab647a22e1ef63defef8da02ae03a6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa81d914_9f4a0726",
+        "filename": "python-aodhclient.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 424
+      },
+      "writtenOn": "2017-10-03T13:43:46Z",
+      "side": 1,
+      "message": "for here too",
+      "revId": "c80e471956ab647a22e1ef63defef8da02ae03a6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
