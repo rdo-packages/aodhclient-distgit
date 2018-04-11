@@ -170,3 +170,4 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %license LICENSE
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/python-aodhclient/commit/?id=c96b2c335d3e8f0fb3367113926145d5af1667ac
