@@ -1,8 +1,15 @@
-%global pypi_name aodhclient
-
-%if 0%{?fedora}
-%global with_python3 1
+# Macros for py2/py3 compatibility
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global pyver %{python3_pkgversion}
+%else
+%global pyver 2
 %endif
+%global pyver_bin python%{pyver}
+%global pyver_sitelib %python%{pyver}_sitelib
+%global pyver_install %py%{pyver}_install
+%global pyver_build %py%{pyver}_build
+# End of macros for py2/py3 compatibility
+%global pypi_name aodhclient
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
@@ -24,26 +31,32 @@ BuildArch:        noarch
 %description
 %{common_desc}
 
-%package -n python2-%{pypi_name}
+%package -n python%{pyver}-%{pypi_name}
 Summary:          Python API and CLI for OpenStack Aodh
-%{?python_provide:%python_provide python2-%{pypi_name}}
+%{?python_provide:%python_provide python%{pyver}-%{pypi_name}}
 
-BuildRequires:    python-setuptools
-BuildRequires:    python2-devel
-BuildRequires:    python-pbr
+BuildRequires:    python%{pyver}-setuptools
+BuildRequires:    python%{pyver}-devel
+BuildRequires:    python%{pyver}-pbr
 BuildRequires:    git
 
-Requires:         python-pbr
-Requires:         python-cliff >= 1.14.0
-Requires:         python-oslo-i18n >= 1.5.0
-Requires:         python-oslo-serialization >= 1.4.0
-Requires:         python-oslo-utils >= 2.0.0
-Requires:         python-keystoneauth1 >= 1.0.0
-Requires:         python-six >= 1.9.0
-Requires:         python-osc-lib >= 1.0.1
+Requires:         python%{pyver}-pbr
+Requires:         python%{pyver}-cliff >= 1.14.0
+Requires:         python%{pyver}-oslo-i18n >= 1.5.0
+Requires:         python%{pyver}-oslo-serialization >= 1.4.0
+Requires:         python%{pyver}-oslo-utils >= 2.0.0
+Requires:         python%{pyver}-keystoneauth1 >= 1.0.0
+Requires:         python%{pyver}-six >= 1.9.0
+Requires:         python%{pyver}-osc-lib >= 1.0.1
 Requires:         pyparsing
+# Handle python2 exception
+%if %{pyver} == 2
+Requires:         pyparsing
+%else
+Requires:         python%{pyver}-pyparsing
+%endif
 
-%description -n python2-%{pypi_name}
+%description -n python%{pyver}-%{pypi_name}
 %{common_desc}
 
 
@@ -52,12 +65,12 @@ Summary:          Documentation for OpenStack Aodh API Client
 
 BuildRequires:    python-sphinx
 # FIXME: remove following line when a new release including https://review.openstack.org/#/c/476759/ is in u-c
-BuildRequires:    python-oslo-sphinx
-BuildRequires:    python-openstackdocstheme
-BuildRequires:    python-keystoneauth1
-BuildRequires:    python-oslo-utils
-BuildRequires:    python-oslo-serialization
-BuildRequires:    python-cliff
+BuildRequires:    python%{pyver}-oslo-sphinx
+BuildRequires:    python%{pyver}-openstackdocstheme
+BuildRequires:    python%{pyver}-keystoneauth1
+BuildRequires:    python%{pyver}%{pyver}-oslo-utils
+BuildRequires:    python%{pyver}-oslo-serialization
+BuildRequires:    python%{pyver}-cliff
 
 
 %description doc
@@ -66,45 +79,12 @@ BuildRequires:    python-cliff
 
 This package contains auto-generated documentation.
 
-%package -n python2-%{pypi_name}-tests
+%package -n python%{pyver}-%{pypi_name}-tests
 Summary:          Python API and CLI for OpenStack Aodh Tests
-Requires:         python2-%{pypi_name} = %{version}-%{release}
+Requires:         python%{pyver}-%{pypi_name} = %{version}-%{release}
 
-%description -n python2-%{pypi_name}-tests
+%description -n python%{pyver}-%{pypi_name}-tests
 %{common_desc}
-
-
-%if 0%{?with_python3}
-%package -n python3-%{pypi_name}
-Summary:          Python API and CLI for OpenStack Aodh
-
-%{?python_provide:%python_provide python3-%{pypi_name}}
-
-BuildRequires:    python3-setuptools
-BuildRequires:    python3-devel
-BuildRequires:    python3-pbr
-
-Requires:         python3-pbr
-Requires:         python3-cliff >= 1.14.0
-Requires:         python3-oslo-i18n >= 1.5.0
-Requires:         python3-oslo-serialization >= 1.4.0
-Requires:         python3-oslo-utils >= 2.0.0
-Requires:         python3-keystoneauth1 >= 1.0.0
-Requires:         python3-six >= 1.9.0
-Requires:         python3-osc-lib >= 1.0.1
-Requires:         python3-pyparsing
-
-%description -n python3-%{pypi_name}
-%{common_desc}
-
-%package -n python3-%{pypi_name}-tests
-Summary:          Python API and CLI for OpenStack Aodh Tests
-Requires:         python3-%{pypi_name} = %{version}-%{release}
-
-%description -n python3-%{pypi_name}-tests
-%{common_desc}
-
-%endif
 
 %prep
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
@@ -114,57 +94,31 @@ rm -f {,test-}requirements.txt
 
 
 %build
-%py2_build
-%if 0%{?with_python3}
-%py3_build
-%endif
+%{pyver_build}
 
 %install
-%if 0%{?with_python3}
-%py3_install
-mv %{buildroot}%{_bindir}/aodh %{buildroot}%{_bindir}/aodh-%{python3_version}
-ln -s ./aodh-%{python3_version} %{buildroot}%{_bindir}/aodh-3
-%endif
+%{pyver_install}
 
-%py2_install
-mv %{buildroot}%{_bindir}/aodh %{buildroot}%{_bindir}/aodh-%{python2_version}
-ln -s ./aodh-%{python2_version} %{buildroot}%{_bindir}/aodh-2
-
-ln -s ./aodh-2 %{buildroot}%{_bindir}/aodh
+# Create a versioned binary for backwards compatibility until everything is pure py3
+ln -s aodh %{buildroot}%{_bindir}/aodh-%{pyver}
 
 export PYTHONPATH=.
-sphinx-build -b html doc/source doc/build/html
-# remove the sphinx-build leftovers
+sphinx-build-%{pyver} -b html doc/source doc/build/html
+# remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 
-%files -n python2-%{pypi_name}
+%files -n python%{pyver}-%{pypi_name}
 %doc README.rst
 %license LICENSE
-%{python2_sitelib}/aodhclient
-%{python2_sitelib}/*.egg-info
+%{pyver_sitelib}/aodhclient
+%{pyver_sitelib}/*.egg-info
 %{_bindir}/aodh
-%{_bindir}/aodh-2
-%{_bindir}/aodh-%{python2_version}
-%exclude %{python2_sitelib}/aodhclient/tests
+%{_bindir}/aodh-%{pyver}
+%exclude %{pyver_sitelib}/aodhclient/tests
 
-%files -n python2-%{pypi_name}-tests
+%files -n python%{pyver}-%{pypi_name}-tests
 %license LICENSE
-%{python2_sitelib}/aodhclient/tests
-
-%if 0%{?with_python3}
-%files -n python3-%{pypi_name}
-%license LICENSE
-%doc README.rst
-%{python3_sitelib}/%{pypi_name}
-%{python3_sitelib}/*.egg-info
-%{_bindir}/aodh-3
-%{_bindir}/aodh-%{python3_version}
-%exclude %{python3_sitelib}/aodhclient/tests
-
-%files -n python3-%{pypi_name}-tests
-%license LICENSE
-%{python3_sitelib}/aodhclient/tests
-%endif
+%{pyver_sitelib}/aodhclient/tests
 
 %files doc
 %doc doc/build/html
