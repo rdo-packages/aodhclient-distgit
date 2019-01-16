@@ -12,6 +12,7 @@
 %global pypi_name aodhclient
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+%global with_doc 1
 
 %global common_desc \
 This is a client library for Aodh built on the Aodh API. It \
@@ -58,7 +59,7 @@ Requires:         python%{pyver}-pyparsing
 %description -n python%{pyver}-%{pypi_name}
 %{common_desc}
 
-
+%if 0%{?with_doc}
 %package  doc
 Summary:          Documentation for OpenStack Aodh API Client
 
@@ -75,6 +76,7 @@ BuildRequires:    python%{pyver}-cliff
 (aodh).
 
 This package contains auto-generated documentation.
+%endif
 
 %package -n python%{pyver}-%{pypi_name}-tests
 Summary:          Python API and CLI for OpenStack Aodh Tests
@@ -99,10 +101,12 @@ rm -f {,test-}requirements.txt
 # Create a versioned binary for backwards compatibility until everything is pure py3
 ln -s aodh %{buildroot}%{_bindir}/aodh-%{pyver}
 
+%if 0%{?with_doc}
 export PYTHONPATH=.
 sphinx-build-%{pyver} -b html doc/source doc/build/html
 # remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
+%endif
 
 %files -n python%{pyver}-%{pypi_name}
 %doc README.rst
@@ -117,8 +121,10 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %license LICENSE
 %{pyver_sitelib}/aodhclient/tests
 
+%if 0%{?with_doc}
 %files doc
 %doc doc/build/html
 %license LICENSE
+%endif
 
 %changelog
