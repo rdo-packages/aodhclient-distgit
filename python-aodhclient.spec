@@ -46,6 +46,7 @@ Requires:         python%{pyver}-cliff >= 1.14.0
 Requires:         python%{pyver}-oslo-i18n >= 1.5.0
 Requires:         python%{pyver}-oslo-serialization >= 1.4.0
 Requires:         python%{pyver}-oslo-utils >= 2.0.0
+Requires:         python%{pyver}-osprofiler >= 1.4.0
 Requires:         python%{pyver}-keystoneauth1 >= 1.0.0
 Requires:         python%{pyver}-six >= 1.9.0
 Requires:         python%{pyver}-osc-lib >= 1.0.1
