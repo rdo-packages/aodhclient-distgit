@@ -50,12 +50,7 @@ Requires:         python%{pyver}-osprofiler >= 1.4.0
 Requires:         python%{pyver}-keystoneauth1 >= 1.0.0
 Requires:         python%{pyver}-six >= 1.9.0
 Requires:         python%{pyver}-osc-lib >= 1.0.1
-# Handle python2 exception
-%if %{pyver} == 2
-Requires:         pyparsing
-%else
 Requires:         python%{pyver}-pyparsing
-%endif
 
 %description -n python%{pyver}-%{pypi_name}
 %{common_desc}
