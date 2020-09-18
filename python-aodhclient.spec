@@ -8,8 +8,8 @@ This is a client library for Aodh built on the Aodh API. It \
 provides a Python API (the aodhclient module) and a command-line tool.
 
 Name:             python-aodhclient
-Version:          XXX
-Release:          XXX
+Version:          2.1.1
+Release:          1%{?dist}
 Summary:          Python API and CLI for OpenStack Aodh
 
 License:          ASL 2.0
@@ -113,3 +113,6 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %changelog
+* Fri Sep 18 2020 RDO <dev@lists.rdoproject.org> 2.1.1-1
+- Update to 2.1.1
+
