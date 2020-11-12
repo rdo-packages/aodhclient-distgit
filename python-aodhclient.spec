@@ -41,7 +41,7 @@ Summary:          Python API and CLI for OpenStack Aodh
 BuildRequires:    python3-setuptools
 BuildRequires:    python3-devel
 BuildRequires:    python3-pbr
-BuildRequires:    git
+BuildRequires:    git-core
 
 Requires:         python3-pbr
 Requires:         python3-cliff >= 1.14.0
@@ -88,7 +88,7 @@ Requires:         python3-%{pypi_name} = %{version}-%{release}
 %if 0%{?sources_gpg} == 1
 %{gpgverify}  --keyring=%{SOURCE102} --signature=%{SOURCE101} --data=%{SOURCE0}
 %endif
-%autosetup -n %{pypi_name}-%{upstream_version} -S git
+%autosetup -n %{pypi_name}-%{upstream_version} -S git-core
 
 # Let RPM handle the requirements
 rm -f {,test-}requirements.txt
