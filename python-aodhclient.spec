@@ -50,7 +50,6 @@ Requires:         python3-oslo-serialization >= 1.4.0
 Requires:         python3-oslo-utils >= 2.0.0
 Requires:         python3-osprofiler >= 1.4.0
 Requires:         python3-keystoneauth1 >= 1.0.0
-Requires:         python3-six >= 1.9.0
 Requires:         python3-osc-lib >= 1.0.1
 Requires:         python3-pyparsing
 
