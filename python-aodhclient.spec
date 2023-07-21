@@ -3,6 +3,12 @@
 %global pypi_name aodhclient
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 %global with_doc 1
 
 %global common_desc \
@@ -14,7 +20,7 @@ Version:          XXX
 Release:          XXX
 Summary:          Python API and CLI for OpenStack Aodh
 
-License:          ASL 2.0
+License:          Apache-2.0
 URL:              https://launchpad.net/python-aodhclient
 Source0:          https://tarballs.openstack.org/%{name}/%{pypi_name}-%{upstream_version}.tar.gz
 # Required for tarball sources verification
@@ -36,22 +42,10 @@ BuildRequires:  openstack-macros
 
 %package -n python3-%{pypi_name}
 Summary:          Python API and CLI for OpenStack Aodh
-%{?python_provide:%python_provide python3-%{pypi_name}}
 
-BuildRequires:    python3-setuptools
 BuildRequires:    python3-devel
-BuildRequires:    python3-pbr
+BuildRequires:    pyproject-rpm-macros
 BuildRequires:    git-core
-
-Requires:         python3-pbr
-Requires:         python3-cliff >= 1.14.0
-Requires:         python3-oslo-i18n >= 1.5.0
-Requires:         python3-oslo-serialization >= 1.4.0
-Requires:         python3-oslo-utils >= 2.0.0
-Requires:         python3-osprofiler >= 1.4.0
-Requires:         python3-keystoneauth1 >= 1.0.0
-Requires:         python3-osc-lib >= 1.0.1
-Requires:         python3-pyparsing
 
 %description -n python3-%{pypi_name}
 %{common_desc}
@@ -59,13 +53,6 @@ Requires:         python3-pyparsing
 %if 0%{?with_doc}
 %package  doc
 Summary:          Documentation for OpenStack Aodh API Client
-
-BuildRequires:    python3-sphinx
-BuildRequires:    python3-openstackdocstheme
-BuildRequires:    python3-keystoneauth1
-BuildRequires:    python3-oslo-utils
-BuildRequires:    python3-oslo-serialization
-BuildRequires:    python3-cliff
 
 
 %description doc
@@ -89,22 +76,41 @@ Requires:         python3-%{pypi_name} = %{version}-%{release}
 %endif
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
 
-# Let RPM handle the requirements
-rm -f {,test-}requirements.txt
 
+
+sed -i /^[[:space:]]*-c{env:.*_CONSTRAINTS_FILE.*/d tox.ini
+sed -i "s/^deps = -c{env:.*_CONSTRAINTS_FILE.*/deps =/" tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
+
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
 
 %build
-%{py3_build}
+%pyproject_wheel
 
 %install
-%{py3_install}
+%pyproject_install
 
 # Create a versioned binary for backwards compatibility until everything is pure py3
 ln -s aodh %{buildroot}%{_bindir}/aodh-3
 
 %if 0%{?with_doc}
-export PYTHONPATH=.
-sphinx-build-3 -b html doc/source doc/build/html
+%tox -e docs
 # remove the sphinx-build-3 leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
@@ -113,7 +119,7 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/aodhclient
-%{python3_sitelib}/*.egg-info
+%{python3_sitelib}/*.dist-info
 %{_bindir}/aodh
 %{_bindir}/aodh-3
 %exclude %{python3_sitelib}/aodhclient/tests
