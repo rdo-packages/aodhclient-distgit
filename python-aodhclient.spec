@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0xa7475c5f2122fec3f90343223fe3bf5aad1080e4
+%global sources_gpg_sign 0x2ef3fe0ec2b075ab7458b5f8b702b20b13df2318
 %global pypi_name aodhclient
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
@@ -10,7 +10,7 @@ This is a client library for Aodh built on the Aodh API. It \
 provides a Python API (the aodhclient module) and a command-line tool.
 
 Name:             python-aodhclient
-Version:          3.2.0
+Version:          3.2.1
 Release:          1%{?dist}
 Summary:          Python API and CLI for OpenStack Aodh
 
@@ -129,6 +129,9 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %changelog
+* Mon Mar 04 2024 RDO <dev@lists.rdoproject.org> 3.2.1-1
+- Update to 3.2.1
+
 * Thu Mar 09 2023 RDO <dev@lists.rdoproject.org> 3.2.0-1
 - Update to 3.2.0
 
