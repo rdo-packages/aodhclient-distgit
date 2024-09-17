@@ -1,0 +1,8 @@
+Code-Review+2: Joel Capitao <jcapitao@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Workflow+1: Joel Capitao <jcapitao@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Tue, 17 Sep 2024 07:38:32 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/aodhclient-distgit/+/54417
+Project: openstack/aodhclient-distgit
+Branch: refs/heads/dalmatian-rdo
