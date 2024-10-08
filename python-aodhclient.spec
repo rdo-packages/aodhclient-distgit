@@ -93,6 +93,11 @@ for pkg in %{excluded_brs}; do
   done
 done
 
+%if 0%{?fedora}
+# Remove osprofiler as runtime dep
+sed -i /^osprofiler.*/d requirements.txt
+%endif
+
 # Automatic BR generation
 %generate_buildrequires
 %if 0%{?with_doc}
