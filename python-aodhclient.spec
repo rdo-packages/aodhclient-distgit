@@ -23,6 +23,9 @@ Summary:          Python API and CLI for OpenStack Aodh
 License:          Apache-2.0
 URL:              https://launchpad.net/python-aodhclient
 Source0:          https://tarballs.openstack.org/%{name}/%{pypi_name}-%{upstream_version}.tar.gz
+%if 0%{?fedora}
+Patch0:           0001-Revert-Add-OSprofiler-support-for-Aodh-client.patch
+%endif
 # Required for tarball sources verification
 %if 0%{?sources_gpg} == 1
 Source101:        https://tarballs.openstack.org/%{name}/%{pypi_name}-%{upstream_version}.tar.gz.asc
@@ -92,6 +95,11 @@ for pkg in %{excluded_brs}; do
     fi
   done
 done
+
+%if 0%{?fedora}
+# Remove osprofiler as runtime dep
+sed -i /^osprofiler.*/d requirements.txt
+%endif
 
 # Automatic BR generation
 %generate_buildrequires
